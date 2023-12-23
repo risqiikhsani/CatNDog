@@ -47,9 +47,13 @@ import com.example.risqiikhsanicatndog.ui.components.ErrorScreen
 fun CatScreen(navController: NavHostController,retryAction: () -> Unit,catUiState: CatUiState, modifier: Modifier = Modifier) {
     Column {
         TopAppBar(navController, "Cat Images")
+        // state pada cat view model
         when (catUiState) {
+            // jika state loading true , tampilkan loading screen
             is CatUiState.Loading -> LoadingScreen(modifier = modifier.fillMaxSize())
+            // jika state success true , tampilkan catphotosgrid screen
             is CatUiState.Success -> CatPhotosGridScreen(catUiState.photos, modifier)
+            // jika state error true , tampilkan error screen
             is CatUiState.Error -> ErrorScreen(retryAction, modifier = modifier.fillMaxSize())
         }
     }

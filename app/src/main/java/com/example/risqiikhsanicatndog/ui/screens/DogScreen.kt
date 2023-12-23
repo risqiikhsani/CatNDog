@@ -110,9 +110,13 @@ fun DogPhotoCard(photo: DogPhoto, modifier: Modifier = Modifier) {
 fun DogScreen(navController: NavHostController,retryAction: () -> Unit,dogUiState: DogUiState, modifier: Modifier = Modifier) {
     Column {
         TopAppBar(navController,"Dog Images")
+        // state pada dog view model
         when (dogUiState) {
+            // jika state loading true , tampilkan loading screen
             is DogUiState.Loading -> LoadingScreen(modifier = modifier.fillMaxSize())
+            // jika state success true , tampilkan dogphotosgrid screen
             is DogUiState.Success -> DogPhotosGridScreen(dogUiState.photos, modifier)
+            // jika state error true , tampilkan error screen
             is DogUiState.Error -> ErrorScreen(retryAction, modifier = modifier.fillMaxSize())
         }
     }
